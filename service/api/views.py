@@ -34,16 +34,16 @@ async def health() -> str:
         200: {
             "description": "Successful response",
             "content": {
-                "application/json": {
-                    "example": {"user_id":1,"items":[55,11,72,21,88,64,45,59,14,60]}
-                }
+                "application/json": {"example": {"user_id": 1, "items": [55, 11, 72, 21, 88, 64, 45, 59, 14, 60]}}
             },
         },
         404: {
             "description": "Model / user not found",
             "content": {
                 "application/json": {
-                    "example": {"errors":[{"error_key":"model_not_found","error_message":"Model random_101 not found"}]},
+                    "example": {
+                        "errors": [{"error_key": "model_not_found", "error_message": "Model random_101 not found"}]
+                    },
                 }
             },
         },
@@ -51,7 +51,7 @@ async def health() -> str:
             "description": "Unauthorized (wrong token)",
             "content": {
                 "application/json": {
-                    "example": {"errors":[{"error_key":"unauthorized","error_message":"Unauthorized"}]}
+                    "example": {"errors": [{"error_key": "unauthorized", "error_message": "Unauthorized"}]}
                 }
             },
         },
