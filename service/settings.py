@@ -1,4 +1,9 @@
+import os
+
+from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+load_dotenv()
 
 
 class Config(BaseSettings):
@@ -14,6 +19,7 @@ class LogConfig(Config):
 class ServiceConfig(Config):
     service_name: str = "reco_service"
     k_recs: int = 10
+    api_token: str = str(os.getenv("API_TOKEN"))
 
     log_config: LogConfig
 

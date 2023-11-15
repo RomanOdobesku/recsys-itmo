@@ -1,10 +1,11 @@
 from typing import List
 
-from fastapi import APIRouter, FastAPI, Request
+from fastapi import APIRouter, Depends, FastAPI, Request
+from fastapi.security import HTTPBearer
 from pydantic import BaseModel
 
 from rec_sys.random_model import RandomModel
-from service.api.exceptions import UserNotFoundError
+from service.api.exceptions import InvalidTokenError, UserNotFoundError
 from service.log import app_logger
 
 
@@ -13,6 +14,7 @@ class RecoResponse(BaseModel):
     items: List[int]
 
 
+token_auth_scheme = HTTPBearer()
 router = APIRouter()
 
 
@@ -33,10 +35,13 @@ async def get_reco(
     request: Request,
     model_name: str,
     user_id: int,
+    token: str = Depends(token_auth_scheme),
 ) -> RecoResponse:
     app_logger.info(f"Request for model: {model_name}, user_id: {user_id}")
 
-    # Write your code here
+    if request.app.state.api_token != token.credentials:
+        app_logger.info(f"InvalidTokenError: {token.credentials}")
+        raise InvalidTokenError()
 
     if user_id > 10**9:
         raise UserNotFoundError(error_message=f"User {user_id} not found")
