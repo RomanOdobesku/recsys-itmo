@@ -30,6 +30,32 @@ async def health() -> str:
     path="/reco/{model_name}/{user_id}",
     tags=["Recommendations"],
     response_model=RecoResponse,
+    responses={
+        200: {
+            "description": "Successful response",
+            "content": {
+                "application/json": {
+                    "example": {"user_id":1,"items":[55,11,72,21,88,64,45,59,14,60]}
+                }
+            },
+        },
+        404: {
+            "description": "Model / user not found",
+            "content": {
+                "application/json": {
+                    "example": {"errors":[{"error_key":"model_not_found","error_message":"Model random_101 not found"}]},
+                }
+            },
+        },
+        401: {
+            "description": "Unauthorized (wrong token)",
+            "content": {
+                "application/json": {
+                    "example": {"errors":[{"error_key":"unauthorized","error_message":"Unauthorized"}]}
+                }
+            },
+        },
+    },
 )
 async def get_reco(
     request: Request,
