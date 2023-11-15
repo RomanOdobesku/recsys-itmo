@@ -51,7 +51,7 @@ flake: .venv
 pylint: .venv
 	poetry run pylint $(PROJECT) $(TESTS) $(MODELS)
 
-lint: isort flake pylint
+lint: isort flake black pylint
 
 
 # Test
