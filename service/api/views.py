@@ -5,7 +5,7 @@ from fastapi.security import HTTPBearer
 from pydantic import BaseModel
 
 from rec_sys.random_model import RandomModel
-from service.api.exceptions import InvalidTokenError, UserNotFoundError
+from service.api.exceptions import InvalidTokenError, ModelNotFoundError, UserNotFoundError
 from service.log import app_logger
 
 
@@ -48,9 +48,11 @@ async def get_reco(
 
     k_recs = request.app.state.k_recs
 
-    random_model = RandomModel()
-    recommendation = random_model.predict(k_recs=k_recs)
-
+    if model_name == "random_100":
+        random_model = RandomModel()
+        recommendation = random_model.predict(k_recs=k_recs)
+    else:
+        raise ModelNotFoundError(error_message=f"Model {model_name} not found")
     return RecoResponse(user_id=user_id, items=recommendation)
 
 

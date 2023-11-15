@@ -70,6 +70,9 @@ build:
 run: build
 	docker run -p 8080:8080 --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
+# Fix and check
+fix: format lint test
+
 # All
 
 all: setup format lint test run
