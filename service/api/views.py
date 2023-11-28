@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, FastAPI, Request
 from fastapi.security import HTTPBearer
 from pydantic import BaseModel
 
-from rec_sys.random_model import RandomModel
+from rec_sys.models.random_model import RandomModel
 from service.api.exceptions import InvalidTokenError, ModelNotFoundError, UserNotFoundError
 from service.log import app_logger
 

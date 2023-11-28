@@ -1,7 +1,7 @@
 import random
 import typing
 
-from rec_sys.base_model import Model
+from rec_sys.models.base_model import Model
 
 
 class RandomModel(Model):
