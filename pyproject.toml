@@ -10,7 +10,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.10.11"
+python = "3.10.11"
 fastapi = "^0.104.0"
 pydantic = "^2.4.2"
 gunicorn = "^21.2.0"
@@ -19,6 +19,7 @@ orjson = "^3.9.10"
 starlette = "^0.27.0"
 httpx = "^0.22.0"  # for starlette.testclient
 pydantic-settings = "^2.0.3"
+rectools = "^0.4.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "7.4.3"
@@ -29,6 +30,8 @@ bandit = "^1.7.5"
 flake8 = "^6.1.0"
 pylint = "^3.0.2"
 black = "^23.10.1"
+pandas = "^1.5.3"
+notebook = "^7.0.6"
 
 [tool.black]
 line-length = 120
