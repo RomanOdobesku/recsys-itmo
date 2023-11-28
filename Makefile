@@ -51,7 +51,7 @@ flake: .venv
 pylint: .venv
 	poetry run pylint $(PROJECT) $(TESTS) $(MODELS)
 
-lint: isort flake pylint
+lint: isort flake black pylint
 
 
 # Test
@@ -69,6 +69,9 @@ build:
 
 run: build
 	docker run -p 8080:8080 --name $(CONTAINER_NAME) $(IMAGE_NAME)
+
+# Fix and check
+fix: format lint test
 
 # All
 
