@@ -4,9 +4,10 @@ from fastapi import APIRouter, Depends, FastAPI, Request
 from fastapi.security import HTTPBearer
 from pydantic import BaseModel
 
-from rec_sys.random_model import RandomModel
 from service.api.exceptions import InvalidTokenError, ModelNotFoundError, UserNotFoundError
 from service.log import app_logger
+
+from .init_models import model_knn, model_popular, random_model
 
 
 class RecoResponse(BaseModel):
@@ -75,11 +76,16 @@ async def get_reco(
     k_recs = request.app.state.k_recs
 
     if model_name == "random_100":
-        random_model = RandomModel()
-        recommendation = random_model.predict(k_recs=k_recs)
+        reco = random_model.predict(k_recs=k_recs)
+    elif model_name == "popular":
+        reco = model_popular.predict([[user_id]])
+    elif model_name == "knn":
+        reco = model_knn.predict_online([[user_id]])
+
     else:
         raise ModelNotFoundError(error_message=f"Model {model_name} not found")
-    return RecoResponse(user_id=user_id, items=recommendation)
+
+    return RecoResponse(user_id=user_id, items=reco)
 
 
 def add_views(app: FastAPI) -> None:
