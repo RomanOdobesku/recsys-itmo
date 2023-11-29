@@ -69,4 +69,7 @@ venv.bak/
 # data
 data/*.csv
 
+# weights
+models/*.dill
+
 
