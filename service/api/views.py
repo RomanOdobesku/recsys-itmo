@@ -1,28 +1,13 @@
 from typing import List
 
-import dill
 from fastapi import APIRouter, Depends, FastAPI, Request
 from fastapi.security import HTTPBearer
 from pydantic import BaseModel
 
-from rec_sys.data.utils import load_dataset
-from rec_sys.models.random_model import RandomModel
 from service.api.exceptions import InvalidTokenError, ModelNotFoundError, UserNotFoundError
 from service.log import app_logger
 
-interactions_df, users_df, items_df = load_dataset(path="data/")
-
-# Init models
-
-model_knn = None
-with open("models/userknn_tfidf_50.dill", "rb") as f:
-    model_knn = dill.load(f)
-
-model_popular = None
-with open("models/popular.dill", "rb") as f:
-    model_popular = dill.load(f)
-
-random_model = RandomModel()
+from .init_models import model_knn, model_popular, random_model
 
 
 class RecoResponse(BaseModel):

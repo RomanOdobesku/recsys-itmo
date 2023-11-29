@@ -6,6 +6,8 @@ import pandas as pd
 import scipy as sp
 from implicit.nearest_neighbours import ItemItemRecommender
 
+# pylint: disable-all
+
 
 class UserKnn:
     """Class for fit-perdict UserKNN model
