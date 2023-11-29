@@ -18,10 +18,11 @@ class Popular:
             popular.sort_values("user_item_repeats", ascending=False)[["item_id"]].drop_duplicates().to_numpy()[:, 0]
         )
         self.popular_model = PopularModel()
+        self.is_fitted = False
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         if not self.is_fitted:
-            raise Exception("Model is not fitted")
+            raise ValueError("Model is not fitted")
         recommends = []
         try:
             recommends = self.popular_model.recommend(X[0], dataset=self.dataset, k=10, filter_viewed=False)[
