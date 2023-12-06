@@ -69,4 +69,6 @@ venv.bak/
 # data
 data/*.csv
 
+models/*.dill
 
+.recsys_venv
