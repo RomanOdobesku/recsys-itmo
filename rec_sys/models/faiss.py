@@ -1,4 +1,4 @@
-import faiss
+import faiss # pylint: disable=import-error
 import numpy as np
 
 
