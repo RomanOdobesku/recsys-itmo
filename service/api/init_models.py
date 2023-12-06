@@ -39,7 +39,7 @@ def extend_to_k_recs(reco, user_id, k_recs):
         if len(reco_set) == k_recs:
             break
         reco_set.append(r)
-        if len(reco_set)==10:
+        if len(reco_set) == 10:
             break
     reco = np.array(reco_set)
     return reco

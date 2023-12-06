@@ -20,7 +20,7 @@ class Popular:
         self.popular_model = PopularModel()
         self.is_fitted = False
 
-    def predict(self, X: np.ndarray, k:int=10) -> np.ndarray:
+    def predict(self, X: np.ndarray, k: int = 10) -> np.ndarray:
         if not self.is_fitted:
             raise ValueError("Model is not fitted")
         recommends = []
