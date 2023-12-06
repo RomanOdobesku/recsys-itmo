@@ -20,12 +20,12 @@ class Popular:
         self.popular_model = PopularModel()
         self.is_fitted = False
 
-    def predict(self, X: np.ndarray) -> np.ndarray:
+    def predict(self, X: np.ndarray, k:int=10) -> np.ndarray:
         if not self.is_fitted:
             raise ValueError("Model is not fitted")
         recommends = []
         try:
-            recommends = self.popular_model.recommend(X[0], dataset=self.dataset, k=10, filter_viewed=False)[
+            recommends = self.popular_model.recommend(X[0], dataset=self.dataset, k=k, filter_viewed=False)[
                 ["item_id"]
             ].to_numpy()[:, 0]
         except KeyError:

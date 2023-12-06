@@ -5,7 +5,7 @@ from service import log, settings
 
 # The socket to bind.
 host = env("HOST", "0.0.0.0")
-port = int(env("PORT", "8080"))
+port = "10560" # int(env("PORT", "8080"))
 bind = f"{host}:{port}"
 
 # The maximum number of pending connections.
@@ -18,10 +18,10 @@ workers = env("GUNICORN_WORKERS", cpu_count())
 worker_class = env("GUNICORN_WORKER_CLASS", "uvicorn.workers.UvicornWorker")
 
 # The maximum number of requests a worker will process before restarting.
-max_requests = env("GUNICORN_MAX_REQUESTS", 1024)
+max_requests = env("GUNICORN_MAX_REQUESTS", 1024000)
 
 # Workers silent for more than this many seconds are killed and restarted.
-timeout = env("GUNICORN_TIMEOUT", 3600)
+timeout = env("GUNICORN_TIMEOUT", 360000000)
 
 # Timeout for graceful workers restart.
 graceful_timeout = env("GUNICORN_GRACEFUL_TIMEOUT", 5)

@@ -30,7 +30,7 @@ faiss = FAISS(aug_user_emb, aug_item_emb)
 
 def extend_to_k_recs(reco, user_id, k_recs):
     reco = np.squeeze(reco)
-    reco_popular = model_popular.predict([[user_id]])
+    reco_popular = model_popular.predict([[user_id]], k=20)
     reco = np.concatenate([reco, reco_popular])
     reco_set = []
     for r in reco:
@@ -39,5 +39,7 @@ def extend_to_k_recs(reco, user_id, k_recs):
         if len(reco_set) == k_recs:
             break
         reco_set.append(r)
+        if len(reco_set)==10:
+            break
     reco = np.array(reco_set)
     return reco
