@@ -20,7 +20,7 @@ preprocessing_dataset = Preprocessing(users=users_df.copy(), items=items_df.copy
 dataset = preprocessing_dataset.get_dataset()
 
 
-with open("../models/lightfm.dill", "rb") as f:
+with open("models/tuned_lightfm.dill", "rb") as f:
     lightfm_model = dill.load(f)
 
 lightfm = LightFM(dataset=dataset, model=lightfm_model)
