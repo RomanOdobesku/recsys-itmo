@@ -10,7 +10,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "3.10.11"
+python = "3.10.13"
 fastapi = "^0.104.0"
 pydantic = "^2.4.2"
 gunicorn = "^21.2.0"

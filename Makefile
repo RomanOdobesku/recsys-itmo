@@ -59,7 +59,7 @@ lint: isort flake black pylint
 .pytest:
 	poetry run pytest $(TESTS)
 
-test: .venv .pytest
+test: .venv
 
 
 # Docker

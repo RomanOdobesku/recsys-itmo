@@ -1,10 +1,8 @@
 import random
 import typing
 
-from rec_sys.base_model import Model
 
-
-class RandomModel(Model):
+class RandomModel:
     def fit(self, X: typing.Optional[typing.Any] = None, y: typing.Optional[typing.Any] = None) -> None:
         pass
 
