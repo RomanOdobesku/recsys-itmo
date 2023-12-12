@@ -81,7 +81,7 @@ async def get_reco(
         reco = model_popular.predict([[user_id]])
     elif model_name == "faiss":
         _, reco = faiss.search(user_id)
-    elif model_name == "lightfm":
+    elif model_name == "lightfm_online":
         reco = lightfm.predict(user_id)
     else:
         raise ModelNotFoundError(error_message=f"Model {model_name} not found")

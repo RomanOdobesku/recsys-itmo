@@ -44,5 +44,5 @@ class LightFM:
                 filter_viewed=False,
             )["item_id"].to_numpy()
             return item_ids
-        except ValueError:
+        except KeyError:
             return []

@@ -5,11 +5,11 @@ from service import log, settings
 
 # The socket to bind.
 host = env("HOST", "0.0.0.0")
-port = "10560" # int(env("PORT", "8080"))
+port = int(env("PORT", "8080"))
 bind = f"{host}:{port}"
 
 # The maximum number of pending connections.
-backlog = env("GUNICORN_BACKLOG", 2048)
+backlog = env("GUNICORN_BACKLOG", 204800)
 
 # The number of worker processes for handling requests.
 workers = env("GUNICORN_WORKERS", cpu_count())
@@ -24,10 +24,10 @@ max_requests = env("GUNICORN_MAX_REQUESTS", 1024000)
 timeout = env("GUNICORN_TIMEOUT", 360000000)
 
 # Timeout for graceful workers restart.
-graceful_timeout = env("GUNICORN_GRACEFUL_TIMEOUT", 5)
+graceful_timeout = env("GUNICORN_GRACEFUL_TIMEOUT", 50)
 
 # The number of seconds to wait for requests on a Keep-Alive connection.
-keepalive = env("GUNICORN_KEEPALIVE", 5)
+keepalive = env("GUNICORN_KEEPALIVE", 500)
 
 # Detaches the server from the controlling terminal and enters the background.
 daemon = env("GUNICORN_DAEMON", False)
