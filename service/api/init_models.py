@@ -6,6 +6,7 @@ from rec_sys.models.faiss import FAISS
 from rec_sys.models.lightfm import LightFM
 from rec_sys.models.random_model import RandomModel
 from rec_sys.models.ae_recommender import AERecommender
+from rec_sys.models.dssm_offline import DSSM_Offline
 from rec_sys.preprocessing import Preprocessing, load_dataset
 
 interactions_df, users_df, items_df = load_dataset(path="data/")
@@ -32,6 +33,8 @@ faiss = FAISS(aug_user_emb, aug_item_emb)
 ae_path = 'models/autoencoder.dill'
 with open(ae_path, 'rb') as f:
     ae_recommender = dill.load(f)
+
+dssm = DSSM_Offline(path_data="data/dssm_offline.csv")
 
 
 def extend_to_k_recs(reco, user_id, k_recs):
