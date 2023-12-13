@@ -1,8 +1,8 @@
 import numpy as np
 
-class AERecommender:
 
-    MODEL_NAME = 'Autoencoder'
+class AERecommender:
+    MODEL_NAME = "Autoencoder"
 
     def __init__(self, X_preds, X_train_and_val, X_test, users_key_dict, items_keys):
         super(AERecommender, self).__init__()
@@ -20,7 +20,8 @@ class AERecommender:
         return select_from
 
     def recommend(self, user_id, topn=10, verbose=False):
-        # Recommend the highest predicted rating movies that the user hasn't seen yet.
+        # Recommend the highest predicted rating movies
+        # that the user hasn't seen yet.
         try:
             inner_user_id = self.users_key_dict[user_id]
             items_to_select_idx = self.get_items_to_select_idx(inner_user_id)
