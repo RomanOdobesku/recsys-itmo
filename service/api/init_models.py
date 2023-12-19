@@ -1,6 +1,7 @@
 import dill
 import numpy as np
 
+from rec_sys.models.dssm_offline import DSSM_Offline
 from rec_sys.models.faiss import FAISS
 from rec_sys.models.lightfm import LightFM
 from rec_sys.models.random_model import RandomModel
@@ -26,6 +27,12 @@ with open("models/tuned_lightfm.dill", "rb") as f:
 lightfm = LightFM(dataset=dataset, model=lightfm_model)
 aug_item_emb, aug_user_emb = lightfm.get_vectors()
 faiss = FAISS(aug_user_emb, aug_item_emb)
+
+ae_path = "models/autoencoder.dill"
+with open(ae_path, "rb") as f:
+    ae_recommender = dill.load(f)
+
+dssm = DSSM_Offline(path_data="data/dssm_offline.csv")
 
 
 def extend_to_k_recs(reco, user_id, k_recs):

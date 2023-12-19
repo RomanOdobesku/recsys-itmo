@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from service.api.exceptions import InvalidTokenError, ModelNotFoundError, UserNotFoundError
 from service.log import app_logger
 
-from .init_models import extend_to_k_recs, faiss, lightfm, model_popular, random_model
+from .init_models import ae_recommender, dssm, extend_to_k_recs, faiss, lightfm, model_popular, random_model
 
 
 class RecoResponse(BaseModel):
@@ -83,6 +83,10 @@ async def get_reco(
         _, reco = faiss.search(user_id)
     elif model_name == "lightfm_online":
         reco = lightfm.predict(user_id)
+    elif model_name == "ae_recommender":
+        reco = ae_recommender.recommend(user_id)
+    elif model_name == "dssm_offline":
+        reco = dssm.predict([[user_id]])
     else:
         raise ModelNotFoundError(error_message=f"Model {model_name} not found")
     if len(reco) < k_recs:

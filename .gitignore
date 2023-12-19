@@ -70,5 +70,6 @@ venv.bak/
 data/*.csv
 
 models/*.dill
+models/*.ckpt
 
 .recsys_venv
