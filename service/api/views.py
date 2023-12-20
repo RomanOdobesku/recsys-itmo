@@ -87,7 +87,7 @@ async def get_reco(
         reco = ae_recommender.recommend(user_id)
     elif model_name == "dssm_offline":
         reco = dssm.predict([[user_id]])
-    elif model_name == 'ranker':
+    elif model_name == "ranker":
         reco = ranker.recommend(user_id)
     else:
         raise ModelNotFoundError(error_message=f"Model {model_name} not found")

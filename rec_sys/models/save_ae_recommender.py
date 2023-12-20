@@ -78,7 +78,7 @@ total_df["user_id"], users_keys = total_df.user_id.factorize()
 total_df["item_id"], items_keys = total_df.item_id.factorize()
 
 train_encoded = total_df.iloc[: len(interactions_train_df)].values
-test_encoded = total_df.iloc[len(interactions_train_df):].values
+test_encoded = total_df.iloc[len(interactions_train_df) :].values
 
 users_key_dict = {}
 for i in range(len(users_keys)):
