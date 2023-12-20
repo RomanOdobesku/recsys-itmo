@@ -4,6 +4,7 @@ import numpy as np
 from rec_sys.models.dssm_offline import DSSM_Offline
 from rec_sys.models.faiss import FAISS
 from rec_sys.models.lightfm import LightFM
+from rec_sys.models.lightgbm_ranker import Ranker
 from rec_sys.models.random_model import RandomModel
 from rec_sys.preprocessing import Preprocessing, load_dataset
 
@@ -33,6 +34,8 @@ with open(ae_path, "rb") as f:
     ae_recommender = dill.load(f)
 
 dssm = DSSM_Offline(path_data="data/dssm_offline.csv")
+
+ranker = Ranker("../data/ranker_recos.pickle")
 
 
 def extend_to_k_recs(reco, user_id, k_recs):
